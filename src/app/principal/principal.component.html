@@ -1,0 +1,119 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-4">
+    <div class="row">
+      
+
+        <div class="col-md-12">
+            Consultar Por fechas
+            <form [formGroup]="formFechas">
+            <div class="row">
+                <div class="col-md-3">
+                    <mat-form-field class="w-100">
+                        <mat-label>Fecha inicio</mat-label>
+                        <input (dateChange)="cambioDeFecha($event)" formControlName="fechaini" readonly="true" (click)="picker.open()" matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <mat-form-field class="w-100">
+                        <mat-label>Fecha fin</mat-label>
+                        <input [min]="minimo" formControlName="fechafin" readonly="true" (click)="picker2.open()" matInput [matDatepicker]="picker2">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                      </mat-form-field>
+                </div>
+                <div class="col-md-3 d-flex align-items-center">
+                    <button [disabled]="!formFechas.valid" (click)="buscarPorFechas()" mat-raised-button color="primary">Buscar</button>
+                </div>
+            </div>
+        </form>
+        </div>
+        <div class="col-md-12">
+            <button (click)="agregarEquipo()" mat-raised-button color="primary">Agregar equipo</button>
+        </div>
+        <div class="col-12 mt-2">
+            <mat-form-field class="w-100">
+                <mat-label>Buscar por ID</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+              </mat-form-field>
+
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                  </ng-container>
+
+                <ng-container matColumnDef="nombre">
+                  <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                </ng-container>
+              
+                
+                <ng-container matColumnDef="estadio">
+                  <th mat-header-cell *matHeaderCellDef> Estadio </th>
+                  <td mat-cell *matCellDef="let element"> {{element.estadio}} </td>
+                </ng-container>
+              
+               
+                <ng-container matColumnDef="sitioweb">
+                  <th mat-header-cell *matHeaderCellDef> Sitio Web </th>
+                  <td mat-cell *matCellDef="let element"> 
+                      <span *ngIf="element.sitioWeb == null">No tiene</span>
+                      <span *ngIf="element.sitioWeb != null">{{element.sitioWeb}} </span>
+                    </td>
+                </ng-container>
+              
+          
+                <ng-container matColumnDef="nacionalidad">
+                  <th mat-header-cell *matHeaderCellDef> Nacionalidad </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nacionalidad}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="anio">
+                    <th mat-header-cell *matHeaderCellDef> Año de Fundación </th>
+                    <td mat-cell *matCellDef="let element"> {{element.fundacion | date }} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="entrenador">
+                    <th mat-header-cell *matHeaderCellDef> Entrenador </th>
+                    <td mat-cell *matCellDef="let element"> {{element.entrenador}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="capacidad">
+                    <th mat-header-cell *matHeaderCellDef> Capacidad </th>
+                    <td mat-cell *matCellDef="let element"> {{element.capacidad | number}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="valor">
+                    <th mat-header-cell *matHeaderCellDef> Valor </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <span *ngIf="element.valor == null">No tiene</span>
+                        <span *ngIf="element.valor != null">{{element.valor}} </span>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="opciones">
+                    <th mat-header-cell *matHeaderCellDef> Opciones </th>
+                    <td mat-cell *matCellDef="let element"> 
+                    
+                        <button (click)="update(element)" color="primary" mat-icon-button>
+                            <mat-icon aria-label="label">edit</mat-icon>
+                        </button>
+
+                        <button (click)="borrar(element.id)" color="warn" mat-icon-button>
+                            <mat-icon aria-label="label">delete</mat-icon>
+                        </button>
+                    </td>
+                  </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              
+              
+        </div>
+    </div>
+</div>

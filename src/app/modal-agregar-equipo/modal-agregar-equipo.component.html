@@ -1,0 +1,101 @@
+<h2 mat-dialog-title>
+    <span *ngIf="!data.editar">
+        Agregar un equipo
+    </span>
+    <span *ngIf="data.editar">
+        Editar un equipo
+    </span>
+    </h2>
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field class="w-100">
+                    <mat-label>Nombre del equipo</mat-label>
+                    <input matInput formControlName="nombre">
+                    <mat-error *ngIf="form.get('nombre').hasError('required')">
+                                El nombre del equipo es <strong>Requerido</strong>
+                            </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="w-100">
+                    <mat-label>Nombre del estadio</mat-label>
+                    <input matInput formControlName="estadio">
+                    <mat-error *ngIf="form.get('estadio').hasError('required')">
+                                El nombre del estadio es <strong>Requerido</strong>
+                            </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="w-100">
+                    <mat-label>Nombre del entrenador</mat-label>
+                    <input matInput formControlName="entrenador">
+                    <mat-error *ngIf="form.get('entrenador').hasError('required')">
+                                El nombre del entrador es <strong>Requerido</strong>
+                            </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="w-100">
+                    <mat-label>capacidad del estadio</mat-label>
+                    <input matInput formControlName="capacidad">
+                    <mat-error *ngIf="form.get('capacidad').hasError('required')">
+                                La capacidad es <strong>Requerida</strong>
+                            </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="w-100">
+                    <mat-label>Fundación del estadio</mat-label>
+                    <input formControlName="fundacion" readonly="true" (click)="picker.open()" matInput
+                        [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="form.get('fundacion').hasError('required')">
+                                La fundacion es <strong>Requerida</strong>
+                            </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="w-100">
+                    <mat-label>nacionalidad</mat-label>
+                    <input matInput formControlName="nacionalidad">
+                    <mat-error *ngIf="form.get('nacionalidad').hasError('required')">
+                                La nacionalidad es <strong>Requerida</strong>
+                            </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="w-100">
+                    <mat-label>Sitio Web</mat-label>
+                    <input matInput formControlName="sitioWeb">
+                    <mat-error *ngIf="form.get('sitioWeb').hasError('required')">
+                                el sitio web es <strong>Requerido</strong>
+                            </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="w-100">
+                    <mat-label>Valor</mat-label>
+                    <input matInput formControlName="valor">
+                    <mat-error *ngIf="form.get('valor').hasError('required')">
+                                El valor es <strong>Requerido</strong>
+                            </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cerrar</button>
+    <button [disabled]="!form.valid" mat-raised-button color="primary" (click)="crearEquipo()">
+        <span *ngIf="!data.editar">
+            Agregar Equipo
+        </span>
+        <span *ngIf="data.editar">
+            Editar Equipo
+        </span>
+    </button>
+</mat-dialog-actions>
