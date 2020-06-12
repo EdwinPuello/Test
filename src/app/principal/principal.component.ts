@@ -85,7 +85,7 @@ export class PrincipalComponent implements OnInit {
     this.api.buscarPorFecha(moment(this.formFechas.controls.fechaini.value).format('DD-MM-YYYY'),moment(this.formFechas.controls.fechafin.value).format('DD-MM-YYYY')).subscribe((d:any)=>{
       //El buscador por fecha no encontre bien el formato pero sin envargo lo estoy enviado
     },erro=>{
-      Swal.fire('Ocurrio un error','Ocurrio un error al consultar por fechas, probe con los diferentes formatos como (YYYY-MM-DD) (DD-MM-YYYY) y incluso prove con el timestamp y tampoco me deja','question')
+      Swal.fire('Ocurrio un error','Ocurrio un error al consultar por fechas, probe con los diferentes formatos como (YYYY-MM-DD) (DD-MM-YYYY) y incluso probe con el timestamp y tampoco me deja','question')
     })
   }
 
